@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+<title>Search That Website</title> <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</h:head>
+<h:body>
+
+		<!-- Static navbar -->
+		<div class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">elc industries</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+<!-- 						<li class="active"><a href="./">Static top</a></li> -->
+<!-- 						<li><a href="../navbar-fixed-top/">Fixed top</a></li> -->
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+
+
+		<div class="container">
+			<!-- Main component for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<h1>Search That Website</h1>
+				<p>Tiered of reloading a website to check if the content you are looking for is available.</p>
+				<p>Then just enter your email, what you are looking for and the	URL of the website.</p>
+				<p>You will get notified if the content is available.</p>
+			</div>
+			<h:form> 
+			<f:passThroughAttribute name="data-toggle" value="validator" /><f:passThroughAttribute name="role" value="form" />
+				<div class="form-group">
+					<h:inputText class="form-control" value="#{searchBean.email}" autofocus="autofocus" >
+   					<f:passThroughAttribute name="placeholder" value="E-Mail" /><f:passThroughAttribute name="type" value="email" />  
+	   				</h:inputText>
+				</div>
+				<div class="form-group">
+					<h:inputText class="form-control" value="#{searchBean.search}">
+   					<f:passThroughAttribute name="placeholder" value="Search string" />
+	   				</h:inputText>
+				</div>
+				<div class="form-group">
+					<h:inputText class="form-control" value="#{searchBean.weburl}" >
+   					<f:passThroughAttribute name="placeholder" value="URL" /><f:passThroughAttribute name="type" value="url" />  
+	   				</h:inputText>
+				</div>
+				<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.showReturn()}" >
+					<span class="glyphicon glyphicon-star"></span> Go!
+				</button>
+				<div class="alert #{searchBean.getAlert()} alert-dismissible" role="alert" style="float:right;#{searchBean.getAlertVisibility()}">
+					<button type="button" class="close" data-dismiss="alert">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					#{searchBean.getAlertMessage()}
+				</div>
+			</h:form>
+		</div>
+		<!-- /container -->
+</h:body>
+</html>

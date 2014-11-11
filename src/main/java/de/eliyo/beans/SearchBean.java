@@ -1,7 +1,9 @@
 package de.eliyo.beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+
 import eliyo.de.main.DatabaseController;
 
 @ManagedBean
@@ -14,11 +16,12 @@ public class SearchBean {
 	
 	private String alertBadge;
 	private String alertMessage;
+	
+	@ManagedProperty(value = "#{databaseController}")
+	private DatabaseController databaseController;
 
 	public String submit() {
-		DatabaseController contr = new DatabaseController();
-
-		if (contr.insert(email, search, weburl))
+		if (databaseController.insert(email, search, weburl))
 			handleSuccess();
 		else 
 			handleFailure();
@@ -45,6 +48,10 @@ public class SearchBean {
 	
 	public String getAlertMessage() {
 		return alertMessage;
+	}
+	
+	public void setDatabaseController(DatabaseController databaseController) {
+		this.databaseController = databaseController;
 	}
 	
 	public String getEmail() {

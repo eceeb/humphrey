@@ -5,9 +5,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ApplicationScoped;
+
+@ManagedBean
+@ApplicationScoped
 public class DatabaseController {
 
-	private Connection con = null;
+	private Connection con;
 
 	public boolean insert(String email, String search, String website) {
 		try {
@@ -20,12 +25,11 @@ public class DatabaseController {
 			String q = "insert into search values ('" + email + "', '" + website + "', '" + search + "', false)";
 			stmt.executeUpdate(q);
 		} catch (Exception x) {
-			System.out.println("" + x);
 			return false;
 		}
 		return true;
 	}
-//
+	
 	private Connection getConnection() throws Exception {
 		URI dbUri = new URI(System.getenv("DB_URL"));
 

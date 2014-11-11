@@ -1,67 +1,52 @@
 package de.eliyo.beans;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import eliyo.de.main.DatabaseController;
 
 @ManagedBean
 @RequestScoped
-public class SearchBean implements Serializable {
+public class SearchBean {
 
-	private static final long serialVersionUID = 1L;
-
-	private String email = "";
-	private String search = "";
-	private String weburl = "";
+	private String email;
+	private String search;
+	private String weburl;
 	
-	private boolean writtenToDataBase = false;
-	private boolean dataBaseWriteFailer = false;
+	private String alertBadge;
+	private String alertMessage;
 
-	public String showReturn() {
-		writtenToDataBase = false;
-		dataBaseWriteFailer = false;
+	public String submit() {
+		DatabaseController contr = new DatabaseController();
+
+		if (contr.insert(email, search, weburl))
+			handleSuccess();
+		else 
+			handleFailure();
 		
-		if (!email.isEmpty() && !search.isEmpty() && !weburl.isEmpty()) {
-			DatabaseController contr = new DatabaseController();
+		return "";
+	}
+	
+	private void handleSuccess() {
+		alertBadge   = "alert-success";
+		alertMessage = "Success! added: " + search + " on website: " + weburl + " for user: " + email;
+		
+		search = "";
+		weburl = "";
+	}
 
-			if (writtenToDataBase = contr.insert(email, search, weburl)) {
-				search = "";
-				weburl = "";
-				return "";
-			}
-			else {
-				dataBaseWriteFailer = true;
-				System.out.println("soory something went wrong please try again");
-			}
-		}
-		return "";
+	private void handleFailure() {
+		alertBadge   = "alert-danger";
+		alertMessage = "Error! Sorry something went wrong, please try again";
 	}
 	
-	public String getAlert() {
-		String alert = "";
-		if (writtenToDataBase == true && dataBaseWriteFailer == false)
-			alert = "alert-success";
-		if (dataBaseWriteFailer == true)
-			alert = "alert-danger";
-		return alert;
-	}
-	
-	public String getAlertVisibility() {
-		if(writtenToDataBase == false && dataBaseWriteFailer == false)
-			return "visibility:hidden";
-		return "";
+	public String getAlertBadge() {
+		return alertBadge == null ? "collapse" : alertBadge;
 	}
 	
 	public String getAlertMessage() {
-		String message = "";
-		if(writtenToDataBase == true && dataBaseWriteFailer == false)
-			message = "<strong>Success!</strong> added: " + search + " on website :" + weburl + " for user: " + email;
-		if (dataBaseWriteFailer)
-			message =  "<strong>Error!</strong> Sorry something went wrong, please try again";
-		return message;
+		return alertMessage;
 	}
+	
 	public String getEmail() {
 		return email;
 	}

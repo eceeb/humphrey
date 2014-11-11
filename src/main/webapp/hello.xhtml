@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 <title>Search That Website</title> <!-- Bootstrap -->
@@ -62,7 +63,6 @@
 
 
 		<div class="container">
-			<!-- Main component for a primary marketing message or call to action -->
 			<div class="jumbotron">
 				<h1>Search That Website</h1>
 				<p>Tiered of reloading a website to check if the content you are looking for is available.</p>
@@ -72,21 +72,21 @@
 			<h:form> 
 			<f:passThroughAttribute name="data-toggle" value="validator" /><f:passThroughAttribute name="role" value="form" />
 				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.email}" autofocus="autofocus" >
-   					<f:passThroughAttribute name="placeholder" value="E-Mail" /><f:passThroughAttribute name="type" value="email" />  
+					<h:inputText class="form-control" value="#{searchBean.email}" type="email" autofocus="autofocus" p:required="required" >
+   					<f:passThroughAttribute name="placeholder" value="E-Mail" /><f:passThroughAttribute name="type" value="email" />
 	   				</h:inputText>
 				</div>
 				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.search}">
+					<h:inputText id="asdf" class="form-control" value="#{searchBean.search}" p:required="required">
    					<f:passThroughAttribute name="placeholder" value="Search string" />
 	   				</h:inputText>
 				</div>
 				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.weburl}" >
+					<h:inputText class="form-control" value="#{searchBean.weburl}" p:required="required">
    					<f:passThroughAttribute name="placeholder" value="URL" /><f:passThroughAttribute name="type" value="url" />  
 	   				</h:inputText>
 				</div>
-				<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.showReturn()}" >
+				<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.submit()}" >
 					<span class="glyphicon glyphicon-star"></span> Go!
 				</button>
 				<div class="alert #{searchBean.getAlert()} alert-dismissible" role="alert" style="float:right;#{searchBean.getAlertVisibility()}">

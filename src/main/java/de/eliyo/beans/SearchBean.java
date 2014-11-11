@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import eliyo.de.main.DatabaseController;
+import de.eliyo.controller.DatabaseController;
 
 @ManagedBean
 @RequestScoped

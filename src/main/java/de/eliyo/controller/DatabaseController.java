@@ -1,4 +1,4 @@
-package eliyo.de.main;
+package de.eliyo.controller;
 
 import java.net.URI;
 import java.sql.Connection;

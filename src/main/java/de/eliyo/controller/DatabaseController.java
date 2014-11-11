@@ -19,7 +19,6 @@ public class DatabaseController {
 			if (con == null)
 				con = getConnection();
 			
-			System.out.println("insert called");
 			Statement stmt = con.createStatement();
 
 			String q = "insert into search values ('" + email + "', '" + website + "', '" + search + "', false)";

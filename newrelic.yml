@@ -2,6 +2,8 @@
 # Java applications with deep visibility and low overhead.  For more details and additional
 # configuration options visit https://docs.newrelic.com/docs/java/java-agent-configuration.
 #
+# This configuration file is custom generated for Elcinc
+#
 # This section is for settings common to all environments.
 # Do not add anything above this next line.
 common: &default_settings
@@ -10,7 +12,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: 'your license key'
+  license_key: '249786e313c1c600761eb464fae10b50da421f62'
 
   # Agent Enabled
   # Use this setting to disable the agent instead of removing it from the startup command.
@@ -62,7 +64,7 @@ common: &default_settings
   # Default is 1.
   log_file_count: 1
 
-  # The maximum number of bytes to write to any one log file.
+  # The maximum number of kbytes to write to any one log file.
   # The log_file_count must be set greater than 1.
   # Default is 0 (no limit).
   log_limit_in_kbytes: 0
@@ -238,6 +240,12 @@ common: &default_settings
     # for instructions to add these manually to your pages.
     # Set this attribute to false to turn off this behavior.
     auto_instrument: true
+
+  class_transformer:
+    # This instrumentation reports the name of the user principal returned from 
+    # HttpServletRequest.getUserPrincipal() when servlets and filters are invoked.
+    com.newrelic.instrumentation.servlet-user:
+      enabled: false
 
 
 # Application Environments

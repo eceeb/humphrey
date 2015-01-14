@@ -21,9 +21,10 @@ public class DatabaseController {
 			
 			Statement stmt = con.createStatement();
 
-			String q = "insert into search values ('" + email + "', '" + website + "', '" + search + "', false)";
+			String q = "insert into wanted values ('" + website + "', '" + search + "', '" + email + "');";
 			stmt.executeUpdate(q);
 		} catch (Exception x) {
+			System.out.println(x);
 			return false;
 		}
 		return true;

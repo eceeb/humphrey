@@ -9,7 +9,9 @@
 
 <h:head>
 <title>Search That Website</title> <!-- Bootstrap -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Gruppo" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,80 +25,38 @@
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </h:head>
 <h:body>
-
-		<!-- Static navbar -->
-		<div class="navbar navbar-default navbar-static-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">elc industries</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#about">About</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-<!-- 						<li class="active"><a href="./">Static top</a></li> -->
-<!-- 						<li><a href="../navbar-fixed-top/">Fixed top</a></li> -->
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
+	<div class="jumbotron" style="text-align: center; font-family: 'Gruppo'">
+		<h1 style='font-family: "Gruppo"'>Search That Website</h1>
+		<p>Performs a search on any website every 10 minutes</p>
+		<p>Informs you one-off, if your search term was found</p>
+	</div>
+		<h:form style="width: 90%; margin: auto; font-family: 'Gruppo'" > 
+		<f:passThroughAttribute name="data-toggle" value="validator" /><f:passThroughAttribute name="role" value="form" />
+		<div class="form-group">
+			<h:inputText class="form-control" value="#{searchBean.email}" type="email" autofocus="autofocus" p:required="required" >
+				<f:passThroughAttribute name="placeholder" value="E-Mail" /><f:passThroughAttribute name="type" value="email" />
+			</h:inputText>
 		</div>
-
-
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Search That Website</h1>
-				<p>Tiered of reloading a website to check if the content you are looking for is available.</p>
-				<p>Then just enter your email, what you are looking for and the	URL of the website.</p>
-				<p>You will get notified if the content is available.</p>
-			</div>
-			<h:form> 
-			<f:passThroughAttribute name="data-toggle" value="validator" /><f:passThroughAttribute name="role" value="form" />
-				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.email}" type="email" autofocus="autofocus" p:required="required" >
-   					<f:passThroughAttribute name="placeholder" value="E-Mail" /><f:passThroughAttribute name="type" value="email" />
-	   				</h:inputText>
-				</div>
-				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.search}" p:required="required">
-   					<f:passThroughAttribute name="placeholder" value="Search string" />
-	   				</h:inputText>
-				</div>
-				<div class="form-group">
-					<h:inputText class="form-control" value="#{searchBean.weburl}" p:required="required">
-   					<f:passThroughAttribute name="placeholder" value="URL" /><f:passThroughAttribute name="type" value="url" />  
-	   				</h:inputText>
-				</div>
-				<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.submit()}" >
-					<span class="glyphicon glyphicon-star"></span> Go!
-				</button>
-				<div class="alert #{searchBean.getAlertBadge()} alert-dismissible" role="alert" style="float:right;">
-					<button type="button" class="close" data-dismiss="alert">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-					</button>
-					#{searchBean.getAlertMessage()}
-				</div>
-			</h:form>
+		<div class="form-group">
+			<h:inputText class="form-control" value="#{searchBean.search}" p:required="required">
+ 					<f:passThroughAttribute name="placeholder" value="Search string" />
+  				</h:inputText>
 		</div>
-		<!-- /container -->
+		<div class="form-group">
+			<h:inputText class="form-control" value="#{searchBean.weburl}" p:required="required">
+ 					<f:passThroughAttribute name="placeholder" value="URL" /><f:passThroughAttribute name="type" value="url" />  
+  				</h:inputText>
+		</div>
+		<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.submit()}" >
+			<span class="glyphicon glyphicon-star"></span> Go!
+		</button>
+		<div class="alert #{searchBean.getAlertBadge()} alert-dismissible" role="alert" style="float:right;">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		#{searchBean.getAlertMessage()}
+	</div>
+	</h:form>
+<!-- /container -->
 </h:body>
 </html>

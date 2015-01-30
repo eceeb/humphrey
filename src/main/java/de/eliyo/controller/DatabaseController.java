@@ -3,8 +3,7 @@ package de.eliyo.controller;
 import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
-
+import java.sql.PreparedStatement;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -18,11 +17,13 @@ public class DatabaseController {
 		try {
 			if (con == null)
 				con = getConnection();
-			
-			Statement stmt = con.createStatement();
-
-			String q = "insert into wanted values ('" + website + "', '" + search + "', '" + email + "');";
-			stmt.executeUpdate(q);
+	
+			String q = "insert into wanted (url, seek, email) values (?,?,?);";
+			PreparedStatement stmt = con.prepareStatement(q);
+			stmt.setString(1, website);
+			stmt.setString(2, search);
+			stmt.setString(3, email);
+			stmt.executeUpdate();
 		} catch (Exception x) {
 			System.out.println(x);
 			return false;

@@ -22,14 +22,14 @@ public class SearchBean {
 
 	public String submit() {
 		if (databaseController.insert(email, search, weburl))
-			handleSuccess();
+			showSuccessMessage();
 		else 
-			handleFailure();
+			showFailureMessage();
 		
 		return "";
 	}
 	
-	private void handleSuccess() {
+	private void showSuccessMessage() {
 		alertBadge   = "alert-success";
 		alertMessage = "Success! added: " + search + " on website: " + weburl + " for user: " + email;
 		
@@ -37,7 +37,7 @@ public class SearchBean {
 		weburl = "";
 	}
 
-	private void handleFailure() {
+	private void showFailureMessage() {
 		alertBadge   = "alert-danger";
 		alertMessage = "Error! Sorry something went wrong, please try again";
 	}

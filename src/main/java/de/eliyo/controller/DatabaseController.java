@@ -4,6 +4,9 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -12,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 public class DatabaseController {
 
 	private Connection con;
+	private static final Logger logger = Logger.getLogger( DatabaseController.class.getName() );
 
 	public boolean insert(String email, String search, String website) {
 		try {
@@ -24,8 +28,9 @@ public class DatabaseController {
 			stmt.setString(2, search);
 			stmt.setString(3, email);
 			stmt.executeUpdate();
+			logger.log( Level.INFO, "inserted search for {0} from {1} on {2}", new Object[]{search, email, website});
 		} catch (Exception x) {
-			System.out.println(x);
+			logger.log( Level.SEVERE, x.toString(), x );
 			return false;
 		}
 		return true;

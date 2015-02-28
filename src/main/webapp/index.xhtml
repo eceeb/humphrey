@@ -4,13 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 <title>Search That Website</title> <!-- Bootstrap -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<h:outputStylesheet library="css" name="custom.css"  />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Gruppo" />
+<link href="//fonts.googleapis.com/css?family=Gruppo" rel="stylesheet" type="text/css" />
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -25,24 +27,28 @@
 	</div>
 	<h:form style="width: 90%; margin: auto; font-family: 'Gruppo'" p:role="form" p:data-toggle="validator"> 
 		<div class="form-group">
-			<h:inputText class="form-control" value="#{searchBean.email}" type="email" p:autofocus="" 
+			<h:inputText class="form-control" value="#{wanted.email}" type="email" p:autofocus="" 
 							p:required="" p:placeholder="E-Mail" p:type="email" />
 		</div>
 		<div class="form-group">
-			<h:inputText class="form-control" value="#{searchBean.search}" p:required="" p:placeholder="Search string" />
+			<h:inputText class="form-control" value="#{wanted.search}" p:required="" p:placeholder="Search string" />
 		</div>
 		<div class="form-group">
-			<h:inputText class="form-control" value="#{searchBean.weburl}" p:required=""
+			<h:inputText class="form-control" value="#{wanted.weburl}" p:required=""
 							p:placeholder="Direct URL e.g. http://webpage.com/subpage" p:type="url" />
 		</div>
-		<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchBean.submit()}" >
+   		<h:selectOneRadio value="#{wanted.interval}" styleClass="radioButtonSpace">
+   			<f:selectItem itemValue="10" itemLabel="every 10 minutes" />
+   			<f:selectItem itemValue="1400" itemLabel="daily" />
+   		</h:selectOneRadio>
+		<button type="submit" class="btn btn-default btn-lg" jsf:action="#{searchController.submit()}" >
 			<span class="glyphicon glyphicon-star"></span> Go!
 		</button>
-		<div class="alert #{searchBean.getAlertBadge()} alert-dismissible" role="alert" style="float:right;">
+		<div class="alert #{searchController.getAlertBadge()} alert-dismissible" role="alert" style="float:right;">
 			<button type="button" class="close" data-dismiss="alert">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 			</button>
-			#{searchBean.getAlertMessage()}
+			#{searchController.getAlertMessage()}
 		</div>
 	</h:form>
 </h:body>

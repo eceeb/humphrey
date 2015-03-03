@@ -7,22 +7,21 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import de.eliyo.beans.Wanted;
 
 @ManagedBean
-@ApplicationScoped
+@RequestScoped
 public class SearchService {
 
-	private Connection con;
 	private static final Logger logger = Logger.getLogger( SearchService.class.getName() );
 
 	public boolean insert(Wanted w) {
+		Connection con = null;
 		try {
-			if (con == null)
-				con = getConnection();
+			con = getConnection();
 	
 			String q = "insert into wanted (url, seek, email, interval) values (?,?,?,?);";
 			PreparedStatement stmt = con.prepareStatement(q);
@@ -36,17 +35,27 @@ public class SearchService {
 		} catch (Exception x) {
 			logger.log( Level.SEVERE, x.toString(), x );
 			return false;
+		} finally {
+			closeConnection(con);
 		}
 		return true;
 	}
 	
+
 	private Connection getConnection() throws Exception {
 		URI dbUri = new URI(System.getenv("DB_URL"));
-
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
 		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
-
+	
+	
+	private void closeConnection(Connection con) {
+		try {
+			con.close();
+		} catch(Exception x){
+			logger.log( Level.SEVERE, x.toString(), x );
+		}
+	}
 }

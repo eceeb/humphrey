@@ -10,7 +10,7 @@ public class Wanted {
 	private String email;
 	private String search;
 	private String weburl;
-	private int interval;
+	private int interval = 10;
 	
 	public String getEmail() {
 		return email;
@@ -37,7 +37,7 @@ public class Wanted {
 	}
 
 	public int getInterval() {
-		return interval == 0 ? 10 : interval;
+		return interval;
 	}
 
 	public void setInterval(int interval) {

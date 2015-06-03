@@ -4,6 +4,7 @@ var path = require('path');
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL;
 
+/* GET home page. */
 router.get('/', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../views', 'index.html'));
 });
@@ -22,12 +23,15 @@ router.post('/api/v1/todos', function(req, res) {
 		}
 		
 		var insert = 'insert into wanted (url, seek, email, interval) values ($1, $2, $3, $4);'
-		client.query(insert, [data.url, data.seek, data.email, data.interval]);
+		var query  = client.query(insert, [data.url, data.seek, data.email, data.interval]);
 		
-		client.end();
-		console.log("Inserted new search");
-		return res.json();
+		query.on('end', function() {
+			console.log("Inserted new search");
+			client.end();
+			return res.json();
+		});
 	});
 });
 
+// what is that? some kind of global variable?
 module.exports = router;

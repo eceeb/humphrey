@@ -33,5 +33,4 @@ router.post('/api/v1/todos', function(req, res) {
 	});
 });
 
-// what is that? some kind of global variable?
 module.exports = router;

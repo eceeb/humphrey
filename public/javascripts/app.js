@@ -4,7 +4,7 @@ angular.module('search', [])
 
     $scope.formData = {};
     $scope.todoData = {};
-    $scope.formData.interval = 10;
+    $scope.formData.interval = "10";
 	var alertBadge = 'collapse';
 	var alertMessage = '';
 		

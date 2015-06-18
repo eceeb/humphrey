@@ -4,9 +4,13 @@ var path = require('path');
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL;
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../views', 'index.html'));
+});
+
+router.get('/navbar', function (req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'navbar.html'));
 });
 
 router.post('/api/v1/todos', function(req, res) {

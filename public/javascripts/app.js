@@ -27,7 +27,7 @@ angular.module('search', [])
 				console.log(data);
 			})
 			.error(function(error) {
-				alertBadge = 'alert-danger';
+				alertBadge  = 'alert-danger';
 				alertMessage = 'Sorry something went wrong please try again';
 		});
 	};

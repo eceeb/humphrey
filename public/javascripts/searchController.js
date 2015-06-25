@@ -1,29 +1,26 @@
-angular.module('search', [])
+module.controller('searchController', function($scope, $http) {
 
-.controller('searchController', function($scope, $http) {
-
-    $scope.formData = {};
-    $scope.todoData = {};
-    $scope.formData.interval = "10";
-	var alertBadge = 'collapse';
+	var alertBadge   = 'collapse';
 	var alertMessage = '';
+	
+    $scope.formData = {};
+    $scope.formData.interval = "10";
 		
 	// Create a new search entry
-	$scope.insertSearch = function(todoID) {
-	
+	$scope.insertSearch = function() {
+		
 		// some clients don't allow client side validation
 		var search = $scope.formData;
 		if (!search.url || !search.seek || !search.email)
 			return;
 		
-		$http.post('/api/v1/todos', $scope.formData)
+		$http.post('/api/v1/addSearch', $scope.formData)
 			.success(function(data) {
 				var s = $scope.formData;
 				alertMessage = 'Successfully inserted search: ' + s.seek + ' on: ' + s.url;
 				alertBadge  = 'alert-success';
 				$scope.formData.url = '';
 				$scope.formData.seek = '';
-				$scope.todoData = data;
 				console.log(data);
 			})
 			.error(function(error) {
@@ -39,5 +36,4 @@ angular.module('search', [])
 	$scope.getAlertMessage = function() {
 		return alertMessage;
 	}
-
 });

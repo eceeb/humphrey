@@ -1,3 +1,4 @@
+<!-- http://stackoverflow.com/questions/12295983/set-active-tab-style-with-angularjs -->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
 	<div class="navbar-header">
@@ -8,17 +9,11 @@
 	</div>
 	<div id="navbar" class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
-		<li class="active"><a href="#">Home</a></li>
-		<li><a href="#login">Login</a></li>
-		<li><a href="#about">About</a></li>
+		<li ng-class="{active: $route.current.activeTab == 'index'}"><a ng-href='#home' ng-click='setContent("searchForm")'>Home</a></li>
+		<li ng-class="{active: $route.current.activeTab == 'login'}"><a ng-href='#login' ng-click='setContent("loginForm")'>Login</a></li>
+		<li ng-class="{active: $route.current.activeTab == 'about'}"><a ng-href="#about">About</a></li>
+		<li ng-class="{active: $route.current.activeTab == 'history'}"><a ng-href='#history' ng-click='setContent("historyForm")'>History</a></li>
 	  </ul>
 	</div>
   </div>
 </nav>
-
-<script>
-$( "nav li" ).click( function() {
-    $( "li" ).removeClass( "active" );
-    $( this ).addClass( "active" );
-});
-</script>

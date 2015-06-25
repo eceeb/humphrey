@@ -1,0 +1,27 @@
+<form role="form" ng-controller="searchController" style="width: 90%; margin: auto; font-family: 'Gruppo'">
+	<div class="form-group">
+		<input type="url" class="form-control input-lg" placeholder="Direct URL e.g. http://webpage.com/subpage" ng-model="formData.url" required>
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control input-lg" placeholder="Search string" ng-model="formData.seek" required>
+	</div>
+	<div class="form-group">
+		<input type="email" class="form-control input-lg" placeholder="E-Mail" ng-model="formData.email" required>
+	</div>
+	<div class="radio radio-inline radio-success"><label><input type="radio" ng-model="formData.interval" value="10">Every 10 Minutes</label></div>
+	<div class="radio radio-inline radio-success"><label><input type="radio" ng-model="formData.interval" value="60">Hourly</label></div>
+	<div class="radio radio-inline radio-success"><label><input type="radio" ng-model="formData.interval" value="1440">Daily</label></div>
+	
+	<div>
+		<button type="submit" class="btn btn-primary btn-lg" ng-click="insertSearch()">Submit</button>
+	</div>
+
+  </div>
+	<div class="alert {{getAlertBadge()}} alert-dismissible" role="alert" style="float:right;">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		{{getAlertMessage()}}
+	</div>
+	<script>$.material.init();</script>
+</form>

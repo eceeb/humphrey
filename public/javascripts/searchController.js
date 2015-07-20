@@ -6,7 +6,6 @@ module.controller('searchController', function($scope, $http) {
     $scope.formData = {};
     $scope.formData.interval = "10";
 		
-	// Create a new search entry
 	$scope.insertSearch = function() {
 		
 		// some clients don't allow client side validation
@@ -16,15 +15,14 @@ module.controller('searchController', function($scope, $http) {
 		
 		$http.post('/api/v1/addSearch', $scope.formData)
 			.success(function(data) {
-				var s = $scope.formData;
+				var s        = $scope.formData;
+				alertBadge   = 'alert-success';
 				alertMessage = 'Successfully inserted search: ' + s.seek + ' on: ' + s.url;
-				alertBadge  = 'alert-success';
-				$scope.formData.url = '';
+				$scope.formData.url  = '';
 				$scope.formData.seek = '';
-				console.log(data);
 			})
 			.error(function(error) {
-				alertBadge  = 'alert-danger';
+				alertBadge   = 'alert-danger';
 				alertMessage = 'Sorry something went wrong please try again';
 		});
 	};

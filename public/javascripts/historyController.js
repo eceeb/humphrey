@@ -2,44 +2,40 @@ module.controller('historyController', function($scope, $http) {
 
 	$scope.searches;
 	$scope.selectedSearch;
-
-	var temp = {};
 	
+	var rollback = {}; // TODO: can be done more elegant? // slice or iterate
 	
 	$http.get('/api/v1/getSearches')
-		.success(function(data) {
-			$scope.searches = data;
-			console.log($scope.searches[0]._id);
-		})
-		.error(function(error) {});
-		
-	$scope.updateSearch = function() {	
-		$http.post('/api/v1/updateSearch', $scope.selectedSearch)
-				// TODO: show result for user
-				.success(function(data) {
-					console.log('update search: ' + $scope.selectedSearch);		
-				})
-	}	
-	
-	$scope.select = function (index) {
-		$scope.selectedSearch = $scope.searches[index];
-		temp.url = $scope.selectedSearch.url;
-		temp.seek = $scope.selectedSearch.seek;
-		temp.found = $scope.selectedSearch.found;
-		temp.email = $scope.selectedSearch.email;
-		temp.interval = $scope.selectedSearch.interval;
+	    .success(function(data) {
+	        $scope.searches = data;
+	    })
+	    .error(function(error) {});
+
+	$scope.updateSearch = function() {
+	    $http.post('/api/v1/updateSearch', $scope.selectedSearch)
+	        // TODO: show result for user
+	        .success(function(data) {
+	        })
 	}
-	
-	$scope.getSelect = function () {
-		return $scope.selectedSearch;
+
+	$scope.select = function(index) {
+	    $scope.selectedSearch = $scope.searches[index];
+	    rollback.url      = $scope.selectedSearch.url;
+	    rollback.seek     = $scope.selectedSearch.seek;
+	    rollback.found    = $scope.selectedSearch.found;
+	    rollback.email    = $scope.selectedSearch.email;
+	    rollback.interval = $scope.selectedSearch.interval;
 	}
-	
-	$scope.dismiss = function () {
-		$scope.selectedSearch.url = temp.url;
-		$scope.selectedSearch.seek = temp.seek;
-		$scope.selectedSearch.email = temp.email;
-		$scope.selectedSearch.found = temp.found;
-		$scope.selectedSearch.interval = temp.interval;
+
+	$scope.getSelect = function() {
+	    return $scope.selectedSearch;
 	}
-	
+
+	$scope.dismiss = function() {
+	    $scope.selectedSearch.url      = rollback.url;
+	    $scope.selectedSearch.seek     = rollback.seek;
+	    $scope.selectedSearch.email    = rollback.email;
+	    $scope.selectedSearch.found    = rollback.found;
+	    $scope.selectedSearch.interval = rollback.interval;
+	}
 });

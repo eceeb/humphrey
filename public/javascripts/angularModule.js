@@ -23,6 +23,5 @@ module.config(function($routeProvider, $locationProvider) {
 			//controller:'navigationController',
 			activeTab: 'index',
 		});
-		
 });
 

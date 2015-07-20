@@ -1,48 +1,44 @@
-var path    = require('path')
-var express = require('express')
-var mongodb = require('mongodb')
-var bcrypt  = require('bcrypt-nodejs')
+var path     = require('path')
+var express  = require('express')
+var mongodb  = require('mongodb')
+var bcrypt   = require('bcrypt-nodejs')
 var ObjectId = require('mongodb').ObjectID
 
-var router  = express.Router()
-var dbUrl   = process.env.MONGOLAB_URI
-var user;
+var router   = express.Router()
+var dbUrl    = process.env.MONGOLAB_URI
+
+
 router.get('/', function(req, res, next) {
-	console.log('loggedIn: ' + req.session.loggedIn)
-	res.sendFile(path.join(__dirname, '../views', 'index.html'))
+    res.sendFile(path.join(__dirname, '../views', 'index.html'))
 })
 
-router.get('/navbar', function (req, res) {
+router.get('/navbar', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'navbar.html'))
 })
 
-router.get('/searchForm', function (req, res) {
+router.get('/searchForm', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'searchForm.html'))
 })
 
-router.get('/loginForm', function (req, res) {
-	console.log('loggedIn: ' + req.session.loggedIn)
+router.get('/loginForm', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'loginForm.html'))
 })
 
-router.get('/historyForm', function (req, res) {
-	if(req.session.loggedIn){
-		console.log('got historyForm')
-		res.sendFile(path.join(__dirname, '../views', 'historyForm.html'))
-	}
-	else {
-	    var err = new Error();
-		console.log('not logged in')
-		res.status(505)
-	}
+router.get('/historyForm', function(req, res) {
+    if (req.session.loggedIn)
+        res.sendFile(path.join(__dirname, '../views', 'historyForm.html'))
+    else {
+        var err = new Error();
+        res.status(505)
+    }
 })
 
-// TODO: close!
+
+// TODO: check DB close on all mongo methods
 router.post('/api/v1/addSearch', function(req, res) {
 
 	mongodb.MongoClient.connect(dbUrl, function(err, db) {
-
-		// Grab data from http request
+	
 		var data = [{url: req.body.url, seek: req.body.seek, email: req.body.email, interval: req.body.interval}];
 		var searches = db.collection('searches')
 		
@@ -52,6 +48,7 @@ router.post('/api/v1/addSearch', function(req, res) {
 		})
 	})
 })
+
 
 router.post('/api/v1/updateSearch', function(req, res) {
 
@@ -74,10 +71,11 @@ router.post('/api/v1/updateSearch', function(req, res) {
 		})
 	})
 })
-//
+
 router.get('/api/v1/getSearches', function(req, res) {
 
 	mongodb.MongoClient.connect(dbUrl, function(err, db) {
+	
 		var searches = db.collection('searches')
 
 		searches.find({ email : { $eq: req.session.email }}).toArray(
@@ -88,12 +86,10 @@ router.get('/api/v1/getSearches', function(req, res) {
 	})
 })
 
-// TODO: check DB close
+
 router.post('/api/v1/tryLogin', function(req, res) {
 
-	console.log('in post try login ' + req.session.views)
 	mongodb.MongoClient.connect(dbUrl, function(err, db) {
-
 		var users = db.collection('users')
 		var data  = [{email: req.body.email, pwd: req.body.pwd}]
 			
@@ -102,13 +98,12 @@ router.post('/api/v1/tryLogin', function(req, res) {
 			if (err) throw err
 			
 			if (doc) {
-
-				if (bcrypt.compareSync(data[0].pwd, doc.pwd)){
+				if (bcrypt.compareSync(data[0].pwd, doc.pwd)) {
 					req.session.loggedIn = 'true'
-					req.session.email = data[0].email
-					return res.json()
+					req.session.email    = data[0].email
+					return res.json() // TODO: needed?
 				}
-				else console.log('password fail')
+				else console.log('password fail') // TODO: show user
 			}
 			else {
 				data[0].pwd  = bcrypt.hashSync(data[0].pwd)
@@ -116,14 +111,11 @@ router.post('/api/v1/tryLogin', function(req, res) {
 		
 					if (err) throw err
 					
-					db.close(function (err) {
-						if(err) throw err
-					})
+					db.close()
 				})
 			}
 		})
 	})
-
 })
 
 module.exports = router

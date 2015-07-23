@@ -8,6 +8,8 @@ var session      = require('express-session')
 
 var app    = express()
 var routes = require('./routes/index')
+var login  = require('./routes/login')
+
 
 app.set('view engine', 'jade')
 
@@ -22,7 +24,8 @@ app.use(session({
     saveUninitialized: true
 }))
 		
-app.use('/', routes)
+app.use(routes)
+app.use(login)
 app.use(express.static(path.join(__dirname, 'public')))
 
 

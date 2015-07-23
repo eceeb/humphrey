@@ -88,7 +88,6 @@ router.get('/api/v1/getSearches', function(req, res) {
 
 
 router.post('/api/v1/tryLogin', function(req, res) {
-
 	mongodb.MongoClient.connect(dbUrl, function(err, db) {
 		var users = db.collection('users')
 		var data  = [{email: req.body.email, pwd: req.body.pwd}]

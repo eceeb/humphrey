@@ -59,7 +59,7 @@ router.post('/api/v1/updateSearch', function(req, res) {
 			{ _id: ObjectId(req.body._id) },
 			{ url: req.body.url,
 			  seek: req.body.seek,
-			  email: req.body.email, //TODO: email can not be updated! // maybe easiest solution would be an upsert
+			  email: req.session.email, //TODO: email can not be updated! // maybe easiest solution would be an upsert
 			  interval:  req.body.interval,
 			  found: req.body.found
 		    },

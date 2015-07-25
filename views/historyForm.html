@@ -1,5 +1,5 @@
 <div ng-controller="historyController">
-    <table class="table table-hover" style="width: 90%; margin: auto; font-family: 'Gruppo'">
+    <table class="table table-hover gruppo align-middle">
         <tr ng-repeat="x in searches" ng-class="{success: x.found == true}">
             <td>{{ x.found  ? "Found" : "Searching"}}</td>
             <td>{{ x.seek }}</td>
@@ -9,12 +9,12 @@
         </tr>
     </table>
     <!-- Modal -->
-    <div class="modal fade" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="top: 25%;">
+    <div class="modal fade" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="update-Search" style="top: 25%;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" ng-click="dismiss()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Update search entry</h4>
+                    <h4 class="modal-title" id="update-Search">Update search entry</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" role="form">
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <input type="email" class="form-control" ng-model="selectedSearch.email" required>
                         </div>
-                        <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="10">Every 10 Minutes</label></div>
+                        <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes</label></div>
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label></div>
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label></div>
                         <div class="checkbox"><label><input type="checkbox" ng-model="selectedSearch.found"> Found</label></div>

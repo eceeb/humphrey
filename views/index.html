@@ -3,18 +3,19 @@
     <head>
         <title>Search That Website</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gruppo" type="text/css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gruppo" type="text/css">
+        <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen">
-        <!-- remove fullpalette (its only for all colors -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
-		
+        
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
-		
+
         <script src="javascripts/angularModule.js"></script>
         <script src="javascripts/loginController.js"></script>
         <script src="javascripts/searchController.js"></script>
@@ -22,14 +23,13 @@
         <script src="javascripts/navigationController.js"></script>
     </head>
     <body ng-controller="navigationController">
-        <!-- Fixed navbar -->
         <div ng-include src="'navbar'"></div>
-        <div class="jumbotron" style="text-align: center; font-family: 'Gruppo'; position: relative; bottom: -80px;">
-            <h1 style='font-family: "Gruppo"'>Search That Website</h1>
+        <div class="gruppo jumbotron move-down">
+            <h1 class="gruppo">Search That Website</h1>
             <p>Performs a search on any website every 10 minutes</p>
             <p>Informs you one-off, if your search term was found</p>
         </div>
-        <div ng-include src="getContent()" style="position: relative; bottom: -80px;"></div>
+        <div class="move-down" ng-include src="getContent()"></div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
 	</body>

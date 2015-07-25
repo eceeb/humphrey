@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.gruppo {
+	text-align: center;
+	font-family: 'Gruppo';
 }
 
-a {
-  color: #00B7FF;
+.align-middle {
+	width: 90%;
+	margin: auto;
+}
+
+.align-left {
+	text-align: left;
+}
+
+.move-down {
+	position: relative;
+	bottom: -80px;
 }

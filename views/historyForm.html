@@ -30,12 +30,14 @@
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes</label></div>
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label></div>
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label></div>
+                        <!-- TODO: consider 'slider' -->
                         <div class="checkbox"><label><input type="checkbox" ng-model="selectedSearch.found"> Found</label></div>
+                        <div class="checkbox"><label><input type="checkbox" ng-model="selectedSearch.remove"> Delete</label></div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="dismiss()" >Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="updateSearch()" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="editSearch()" data-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>

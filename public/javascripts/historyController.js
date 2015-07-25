@@ -3,7 +3,8 @@ module.controller('historyController', function($scope, $http) {
 	$scope.searches;
 	$scope.selectedSearch;
 	
-	var rollback = {}; // TODO: can be done more elegant? // slice or iterate
+	var searchIndex;
+	var rollback = {};
 	
 	$http.get('/api/v1/getSearches')
 	    .success(function(data) {
@@ -11,7 +12,13 @@ module.controller('historyController', function($scope, $http) {
 	    })
 	    .error(function(error) {});
 
-	$scope.updateSearch = function() {
+	$scope.editSearch = function() {
+		if($scope.selectedSearch.remove)
+			$http.post('/api/v1/remove',  $scope.selectedSearch)
+	        .success(function(data) {
+	        	$scope.searches.splice(searchIndex, 1);
+	        })
+	    else    
 	    $http.post('/api/v1/updateSearch', $scope.selectedSearch)
 	        // TODO: show result for user
 	        .success(function(data) {
@@ -19,12 +26,9 @@ module.controller('historyController', function($scope, $http) {
 	}
 
 	$scope.select = function(index) {
+		searchIndex = index;
 	    $scope.selectedSearch = $scope.searches[index];
-	    rollback.url      = $scope.selectedSearch.url;
-	    rollback.seek     = $scope.selectedSearch.seek;
-	    rollback.found    = $scope.selectedSearch.found;
-	    rollback.email    = $scope.selectedSearch.email;
-	    rollback.interval = $scope.selectedSearch.interval;
+	    angular.copy($scope.selectedSearch, rollback);
 	}
 
 	$scope.getSelect = function() {
@@ -32,10 +36,6 @@ module.controller('historyController', function($scope, $http) {
 	}
 
 	$scope.dismiss = function() {
-	    $scope.selectedSearch.url      = rollback.url;
-	    $scope.selectedSearch.seek     = rollback.seek;
-	    $scope.selectedSearch.email    = rollback.email;
-	    $scope.selectedSearch.found    = rollback.found;
-	    $scope.selectedSearch.interval = rollback.interval;
+		angular.copy(rollback, $scope.selectedSearch);
 	}
 });

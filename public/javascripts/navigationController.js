@@ -1,12 +1,13 @@
 module.controller('navigationController', function($scope, $route) {
 	
+	var userLoggedIn = false;
+	var pageContent  = 'searchForm';
 	$scope.$route = $route;
+
 	
-	var pageContent = 'searchForm';
-	
-	// TODO: consider just a setter
-	$scope.$on("userLoggedIn", function(event,args) {
-		pageContent = 'historyForm';
+	$scope.$on("userLoggedIn", function(event, args) {
+		userLoggedIn = true; 
+		pageContent  = 'historyForm';
 	});
 	
 	$scope.getContent = function() {
@@ -14,6 +15,9 @@ module.controller('navigationController', function($scope, $route) {
 	}
 	
 	$scope.setContent = function(content) {
+		if (content == 'historyForm' && !userLoggedIn)
+			content = 'loginAdvice';
+
 		pageContent = content;
 	}
 });

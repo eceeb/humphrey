@@ -23,9 +23,12 @@ router.get('/historyForm', function(req, res) {
     if (req.session.loggedIn)
         res.sendFile(path.join(__dirname, '../views', 'historyForm.html'))
     else 
-    	res.status(403).end()
+    	res.status(401).end()
 })
 
+router.get('/loginAdvice', function(req, res) {
+	res.sendFile(path.join(__dirname, '../views', 'loginAdvice.html'))
+})
 
 // TODO: check DB close on all mongo methods
 router.post('/api/v1/addSearch', function(req, res) {
@@ -52,7 +55,7 @@ router.post('/api/v1/updateSearch', function(req, res) {
 			{ _id: ObjectId(req.body._id) },
 			{ url: req.body.url,
 			  seek: req.body.seek,
-			  email: req.session.email, //TODO: email can not be updated! // maybe easiest solution would be an upsert
+			  email: req.session.email, //TODO: email MUST not be updated! // consider upsert
 			  interval:  req.body.interval,
 			  found: req.body.found
 		    },

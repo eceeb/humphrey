@@ -1,4 +1,4 @@
-module.controller('loginController', function($scope, $http) {
+module.controller('loginController', function($scope, $http, $location) {
 
 	$scope.tryLogin = function() {
 		
@@ -6,6 +6,7 @@ module.controller('loginController', function($scope, $http) {
 			// TODO: show result for user
 			.success(function(data) {
 				$scope.$emit('userLoggedIn', data);
+				$location.path( 'history' );
 			})
 			.error(function(error) {
 				console.log('error')

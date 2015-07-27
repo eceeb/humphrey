@@ -9,7 +9,7 @@ var session      = require('express-session')
 var app    = express()
 var routes = require('./routes/index')
 var login  = require('./routes/login')
-var remove = require('./routes/remove')
+var remove = require('./routes/search')
 
 
 app.set('view engine', 'jade')

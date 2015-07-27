@@ -15,7 +15,7 @@ module.controller('navigationController', function($scope, $route) {
 	}
 	
 	$scope.setContent = function(content) {
-		if (content == 'historyForm' && !userLoggedIn)
+		if (angular.equals(content, 'historyForm') && !userLoggedIn)
 			content = 'loginAdvice';
 
 		pageContent = content;

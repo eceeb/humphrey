@@ -36,8 +36,4 @@ router.post('/api/v1/tryLogin', function(req, res) {
 	})
 })
 
-router.get('/loginForm', function(req, res) {
-    res.sendFile(path.join(__dirname, '../views', 'loginForm.html'))
-})
-
 module.exports = router

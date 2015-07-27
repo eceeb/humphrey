@@ -26,60 +26,12 @@ router.get('/historyForm', function(req, res) {
     	res.status(401).end()
 })
 
+router.get('/loginForm', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'loginForm.html'))
+})
+
 router.get('/loginAdvice', function(req, res) {
 	res.sendFile(path.join(__dirname, '../views', 'loginAdvice.html'))
-})
-
-// TODO: check DB close on all mongo methods
-router.post('/api/v1/addSearch', function(req, res) {
-
-	mongodb.MongoClient.connect(dbUrl, function(err, db) {
-	
-		var data = [{url: req.body.url, seek: req.body.seek, email: req.body.email, interval: req.body.interval}];
-		var searches = db.collection('searches')
-		
-		searches.insert(data, function(err, result) {
-			if(err) throw err
-			return res.json()
-		})
-	})
-})
-
-
-router.post('/api/v1/updateSearch', function(req, res) {
-
-	mongodb.MongoClient.connect(dbUrl, function(err, db) {
-		
-		var searches = db.collection('searches')
-		searches.update(
-			{ _id: ObjectId(req.body._id) },
-			{ url: req.body.url,
-			  seek: req.body.seek,
-			  email: req.session.email, //TODO: email MUST not be updated! // consider upsert
-			  interval:  req.body.interval,
-			  found: req.body.found
-		    },
-			function(err, result) {
-				console.log(err)
-				db.close()
-				if(err) throw err
-					return res.json()
-		})
-	})
-})
-
-router.get('/api/v1/getSearches', function(req, res) {
-
-	mongodb.MongoClient.connect(dbUrl, function(err, db) {
-	
-		var searches = db.collection('searches')
-
-		searches.find({ email : { $eq: req.session.email }}).toArray(
-			function(error, result) {
-				db.close()
-				return res.send(result)
-			}) 
-	})
 })
 
 module.exports = router

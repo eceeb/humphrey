@@ -14,7 +14,7 @@ module.controller('historyController', function($scope, $http) {
 
 	$scope.editSearch = function() {
 		if($scope.selectedSearch.remove)
-			$http.post('/api/v1/remove',  $scope.selectedSearch)
+			$http.post('/api/v1/removeSearch',  $scope.selectedSearch)
 	        .success(function(data) {
 	        	$scope.searches.splice(searchIndex, 1);
 	        })

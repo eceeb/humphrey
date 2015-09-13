@@ -1,10 +1,7 @@
 var path     = require('path')
 var express  = require('express')
-var mongodb  = require('mongodb')
-var ObjectId = require('mongodb').ObjectID
 
 var router   = express()
-var dbUrl    = process.env.MONGOLAB_URI
 
 
 router.get('/', function(req, res, next) {

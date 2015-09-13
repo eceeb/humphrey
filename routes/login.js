@@ -1,4 +1,3 @@
-var path     = require('path')
 var express  = require('express')
 var mongodb  = require('mongodb')
 var bcrypt   = require('bcrypt-nodejs')

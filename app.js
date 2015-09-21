@@ -3,8 +3,9 @@ var logger       = require('morgan')
 var express      = require('express')
 var bodyParser   = require('body-parser')
 var favicon      = require('serve-favicon')
-var cookieParser = require('cookie-parser')
 var session      = require('express-session')
+var RedisStore   = require('connect-redis')(session)
+var client       = require('redis').createClient(process.env.REDIS_URL)
 
 var app    = express()
 var routes = require('./routes/index')
@@ -18,11 +19,14 @@ app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
 app.use(session({
-    secret: '1234567890QWERTY', // TODO: use env var
+    store: new RedisStore({
+        client: client
+    }),
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    secret: process.env.REDIS_SECRET,
+    cookie: {}
 }))
 
 app.use(routes)
@@ -39,7 +43,6 @@ app.use(function(req, res, next) {
 })
 
 // development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);

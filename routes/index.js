@@ -20,7 +20,7 @@ router.get('/historyForm', function(req, res) {
     if (req.session.loggedIn)
         res.sendFile(path.join(__dirname, '../views', 'historyForm.html'))
     else 
-    	res.status(401).end()
+        res.status(401).end()
 })
 
 router.get('/loginForm', function(req, res) {
@@ -29,6 +29,13 @@ router.get('/loginForm', function(req, res) {
 
 router.get('/loginAdvice', function(req, res) {
 	res.sendFile(path.join(__dirname, '../views', 'loginAdvice.html'))
+})
+
+router.post('/api/v1/isUserLoggedIn', function(req, res) {
+    if (req.session.loggedIn)
+        res.status(200).end()
+    else
+        res.status(401).end()
 })
 
 module.exports = router

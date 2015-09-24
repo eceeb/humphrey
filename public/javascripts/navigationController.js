@@ -1,13 +1,10 @@
-module.controller('navigationController', function($scope, $route) {
+module.controller('navigationController', function($scope, $http, $route) {
 	
-	var userLoggedIn = false;
+	$scope.$route	 = $route;	// sets tab active
 	var pageContent  = 'searchForm';
-	$scope.$route = $route;
-
 	
 	$scope.$on("userLoggedIn", function(event, args) {
-		userLoggedIn = true; 
-		pageContent  = 'historyForm';
+		$scope.setContent('historyForm');
 	});
 	
 	$scope.getContent = function() {
@@ -15,9 +12,16 @@ module.controller('navigationController', function($scope, $route) {
 	}
 	
 	$scope.setContent = function(content) {
-		if (angular.equals(content, 'historyForm') && !userLoggedIn)
-			content = 'loginAdvice';
 
-		pageContent = content;
+		if(angular.equals(content, 'historyForm'))
+			$http.post('/api/v1/isUserLoggedIn')
+				.success(function(data) {
+					pageContent = 'historyForm';
+				}) // TODO: show result for user
+				.error(function(error) {
+					pageContent = 'loginAdvice';
+				});
+		else
+			pageContent = content; 
 	}
 });

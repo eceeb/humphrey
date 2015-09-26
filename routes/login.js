@@ -18,7 +18,6 @@ router.post('/api/v1/tryLogin', function(req, res) {
 				if (bcrypt.compareSync(data[0].pwd, doc.pwd)) {
 					req.session.loggedIn = 'true'
 					req.session.email    = data[0].email
-					req.session.save() // will it be saved into the redis store with this? 
 					return res.json() // TODO: needed?
 				}
 				else console.log('password fail') // TODO: show user

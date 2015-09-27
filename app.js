@@ -27,7 +27,7 @@ var sess = {
     secret: process.env.REDIS_SECRET,
     cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // milliseconds
 }
-sess.cookie.secure = app.get('env') === 'production'
+sess.cookie.secure = false //app.get('env') === 'production'
 app.use(session(sess))
 app.use(routes)
 app.use(login)

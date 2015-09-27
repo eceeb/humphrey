@@ -31,18 +31,4 @@ router.get('/loginAdvice', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'loginAdvice.html'))
 })
 
-router.post('/api/v1/isUserLoggedIn', function(req, res) {
-    if (req.session.loggedIn)
-        res.status(200).end()
-    else
-        res.status(401).end()
-})
-
-router.post('/api/v1/isUserLoggedIn', function(req, res) {
-    if (req.session.loggedIn)
-        res.status(200).end()
-    else
-        res.status(401).end()
-})
-
 module.exports = router

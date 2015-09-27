@@ -22,7 +22,7 @@ var sess = {
     store: new RedisStore({
         client: client
     }),
-    resave: true, // also save session if not modified
+    resave: true, // also save session if not modified, should not be necessary because store implements touch method...
     saveUninitialized: false,
     secret: process.env.REDIS_SECRET,
     cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // milliseconds

@@ -35,4 +35,17 @@ router.post('/api/v1/tryLogin', function(req, res) {
 	})
 })
 
+router.post('/api/v1/isUserLoggedIn', function(req, res) {
+    if (req.session.loggedIn)
+        res.status(200).end()
+    else
+        res.status(401).end()
+})
+
+router.post('/api/v1/loggOut', function(req, res) {
+	console.log('rest log out')
+	req.session.destroy()
+	res.status(200).end()
+})
+
 module.exports = router

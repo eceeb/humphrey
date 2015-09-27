@@ -17,3 +17,12 @@ module.config(function($routeProvider, $locationProvider) {
 		});
 });
 
+module.run(function ($rootScope, $http, $location) {
+	// Note 'home' is only loaded, because navigation controller 
+	// loads initially (and reload) content for home
+	$location.path( 'home' );
+	$http.post('/api/v1/isUserLoggedIn')
+		.success(function(data) {
+			$rootScope.loggedIn = true;
+		}).error(function(error) {});
+});

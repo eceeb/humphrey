@@ -11,25 +11,29 @@ router.post('/api/v1/tryLogin', function(req, res) {
 		var data  = [{email: req.body.email, pwd: req.body.pwd}]
 			
 		users.findOne({ email : { $eq: data[0].email } }, function(err, doc) {
-			
-			if (err) throw err
-			
-			if (doc) {
-				if (bcrypt.compareSync(data[0].pwd, doc.pwd)) {
-					req.session.loggedIn = 'true'
-					req.session.email    = data[0].email
-					return res.json() // TODO: needed?
+			try {
+				if (doc) {
+					if (bcrypt.compareSync(data[0].pwd, doc.pwd)) {
+						req.session.loggedIn = 'true'
+						req.session.email    = data[0].email
+						res.status(200).end()
+					}
+					else {
+						console.log('password fail')
+						res.status(401).end() // TODO: show user
+					}
 				}
-				else console.log('password fail') // TODO: show user
+				else {
+					data[0].pwd  = bcrypt.hashSync(data[0].pwd)
+					users.insert(data, function(err, result) {
+						if (err) throw err
+					})
+				}
+			} catch (x) {
+				res.status(500).end()
 			}
-			else {
-				data[0].pwd  = bcrypt.hashSync(data[0].pwd)
-				users.insert(data, function(err, result) {
-		
-					if (err) throw err
-					
-					db.close()
-				})
+			finally {
+				db.close()
 			}
 		})
 	})

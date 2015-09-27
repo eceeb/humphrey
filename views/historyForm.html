@@ -8,7 +8,7 @@
             <td><button type="button" ng-click="select($index)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Edit</button></td>
         </tr>
     </table>
-    <!-- Modal -->
+    <!-- * * * * * * * * * * * * * *  Modal * * * * * * * * * * * * * *   -->
     <div class="modal fade" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="update-Search" style="top: 25%;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -24,15 +24,20 @@
                         <div class="form-group">
                             <input type="text" class="form-control" ng-model="selectedSearch.seek" required>
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" ng-model="selectedSearch.email" required>
+                        <div class="radio radio-inline radio-success">
+                            <label><input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes</label>
                         </div>
-                        <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes</label></div>
-                        <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label></div>
+                        <div class="radio radio-inline radio-success">
+                            <label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label>
+                        </div>
                         <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label></div>
                         <!-- TODO: consider 'slider' -->
-                        <div class="checkbox"><label><input type="checkbox" ng-model="selectedSearch.found"> Found</label></div>
-                        <div class="checkbox"><label><input type="checkbox" ng-model="selectedSearch.remove"> Delete</label></div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="selectedSearch.found"> Found</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="selectedSearch.remove"> Delete</label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

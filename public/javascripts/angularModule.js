@@ -9,9 +9,6 @@ module.config(function($routeProvider, $locationProvider) {
 		when('/history', {                                            
 			activeTab: 'history',                                
         }).
-		when('/about', {                                            
-			activeTab: 'about',                                
-        }).
 		otherwise({
 			activeTab: 'home',
 		});

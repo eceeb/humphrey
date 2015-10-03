@@ -27,6 +27,10 @@ router.get('/loginForm', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'loginForm.html'))
 })
 
+router.get('/registrationForm', function(req, res) {
+    res.sendFile(path.join(__dirname, '../views', 'registrationForm.html'))
+})
+
 router.get('/loginAdvice', function(req, res) {
     res.sendFile(path.join(__dirname, '../views', 'loginAdvice.html'))
 })

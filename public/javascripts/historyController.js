@@ -19,7 +19,7 @@ module.controller('historyController', function($scope, $http) {
 	        	$scope.searches.splice(searchIndex, 1);
 	        })
 	    else    
-	    $http.post('/api/v1/updateSearch', $scope.selectedSearch)
+	    	$http.post('/api/v1/updateSearch', $scope.selectedSearch)
 	        // TODO: show result for user
 	        .success(function(data) {
 	        })

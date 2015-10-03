@@ -7,10 +7,11 @@ var session      = require('express-session')
 var RedisStore   = require('connect-redis')(session)
 var client       = require('redis').createClient(process.env.REDIS_URL)
 
-var app    = express()
-var routes = require('./routes/index')
-var login  = require('./routes/login')
-var remove = require('./routes/search')
+var app      = express()
+var routes   = require('./routes/index')
+var login    = require('./routes/login')
+var remove   = require('./routes/search')
+var register = require('./routes/register')
 
 app.set('view engine', 'jade')
 
@@ -32,6 +33,7 @@ app.use(session(sess))
 app.use(routes)
 app.use(login)
 app.use(remove)
+app.use(register)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // catch 404 and forward to error handler

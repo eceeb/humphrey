@@ -19,7 +19,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="isUserLoggedIn()" ng-class="{active: $route.current.activeTab == 'login'}">
-                    <a ng-href='#login' ng-click='setContent("loginForm")'>Login / Register</a>
+                    <a ng-href='#login' ng-click='setContent("loginForm")'>Login</a>
+                </li>
+                <li ng-hide="isUserLoggedIn()" ng-class="{active: $route.current.activeTab == 'register'}">
+                    <a ng-href='#register' ng-click='setContent("registrationForm")'>Register</a>
                 </li>
 
                 <li ng-show="isUserLoggedIn()" ng-class="{active: $route.current.activeTab == 'login'}">

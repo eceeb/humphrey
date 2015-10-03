@@ -6,6 +6,9 @@ module.config(function($routeProvider, $locationProvider) {
 		when('/login', {                                            
 			activeTab: 'login',                                
         }).
+		when('/register', {
+			activeTab: 'register',
+        }).
 		when('/history', {                                            
 			activeTab: 'history',                                
         }).

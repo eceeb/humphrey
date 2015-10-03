@@ -7,6 +7,11 @@ module.controller('navigationController', function($scope, $http, $route) {
 		$scope.loggedIn = true;
 		$scope.setContent('historyForm');
 	});
+
+	$scope.$on("userRegistered", function(event, args) {
+		$scope.loggedIn = true;
+		$scope.setContent('searchForm');
+	});
 	
 	$scope.getContent = function() {
 		return pageContent;

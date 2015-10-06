@@ -14,12 +14,12 @@ module.controller('historyController', function($scope, $http) {
 
 	$scope.editSearch = function() {
 		if($scope.selectedSearch.remove)
-			$http.post('/api/v1/removeSearch',  $scope.selectedSearch)
+			$http.delete('/api/v1/removeSearch/' +  $scope.selectedSearch._id)
 	        .success(function(data) {
 	        	$scope.searches.splice(searchIndex, 1);
 	        })
 	    else    
-	    	$http.post('/api/v1/updateSearch', $scope.selectedSearch)
+	    	$http.put('/api/v1/updateSearch', $scope.selectedSearch)
 	        // TODO: show result for user
 	        .success(function(data) {
 	        })

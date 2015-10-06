@@ -30,7 +30,7 @@ router.post('/api/v1/login', function(req, res) {
 	})
 })
 
-router.post('/api/v1/isUserLoggedIn', function(req, res) {
+router.get('/api/v1/isUserLoggedIn', function(req, res) {
     req.session.loggedIn ? res.status(200).end() : res.status(401).end()
 })
 

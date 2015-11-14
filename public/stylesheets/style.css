@@ -1,6 +1,6 @@
 @media only screen and (min-width : 1000px) {
-	.h1, .jumbotron h1 {
-    	font-size: 7em !important;
+	.h1, .jumbotron h2 {
+    	font-size: 4em !important;
 	}
 	.jumbotron {
 		padding-bottom: 3em !important;
@@ -13,12 +13,19 @@
 }
 
 .align-middle {
-	width: 90%;
+	width: 50%;
 	margin: auto;
 }
 
-.align-left {
+.custom-table {
+	width: 80% !important;
+	margin: auto;
 	text-align: left;
+}
+
+.move-right {
+	position: relative;
+	left: 40px;
 }
 
 .move-down {

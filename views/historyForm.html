@@ -1,11 +1,11 @@
 <div ng-controller="historyController">
-    <table class="table table-hover gruppo align-middle">
+    <table class="table table-hover gruppo custom-table">
         <tr ng-repeat="x in searches" ng-class="{success: x.found == true}">
             <td>{{ x.found  ? "Found" : "Searching"}}</td>
             <td>{{ x.seek }}</td>
             <td>{{ x.url }}</td>
             <td>{{ x.interval }}</td>
-            <td><button type="button" ng-click="select($index)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Edit</button></td>
+            <td><button type="button" ng-click="select($index)" class="btn btn-material-grey btn-xs" data-toggle="modal" data-target="#myModal">Edit</button></td>
         </tr>
     </table>
     <!-- * * * * * * * * * * * * * *  Modal * * * * * * * * * * * * * *   -->
@@ -30,7 +30,9 @@
                         <div class="radio radio-inline radio-success">
                             <label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label>
                         </div>
-                        <div class="radio radio-inline radio-success"><label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label></div>
+                        <div class="radio radio-inline radio-success">
+                            <label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label>
+                        </div>
                         <!-- TODO: consider 'slider' -->
                         <div class="checkbox">
                             <label><input type="checkbox" ng-model="selectedSearch.found"> Found</label>

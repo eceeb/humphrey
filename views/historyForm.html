@@ -1,13 +1,18 @@
 <div ng-controller="historyController">
-    <table class="table table-hover gruppo custom-table">
+<div class="table-responsive">
+    <table class="table table-hover custom-table">
         <tr ng-repeat="x in searches" ng-class="{success: x.found == true}">
             <td>{{ x.found  ? "Found" : "Searching"}}</td>
             <td>{{ x.seek }}</td>
             <td>{{ x.url }}</td>
-            <td>{{ x.interval }}</td>
-            <td><button type="button" ng-click="select($index)" class="btn btn-material-grey btn-xs" data-toggle="modal" data-target="#myModal">Edit</button></td>
+            <td>{{ x.interval == 1440 ? "daily" : x.interval == 60 ? "hourly" : "10 minutes"}}</td>
+            <td><button type="button" ng-click="select($index)" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-cog"></i>
+                </button>
+            </td>
         </tr>
     </table>
+</div>
     <!-- * * * * * * * * * * * * * *  Modal * * * * * * * * * * * * * *   -->
     <div class="modal fade" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="update-Search" style="top: 25%;">
         <div class="modal-dialog" role="document">
@@ -24,16 +29,15 @@
                         <div class="form-group">
                             <input type="text" class="form-control" ng-model="selectedSearch.seek" required>
                         </div>
-                        <div class="radio radio-inline radio-success">
-                            <label><input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes</label>
-                        </div>
-                        <div class="radio radio-inline radio-success">
-                            <label><input type="radio" ng-model="selectedSearch.interval" value="60">hourly</label>
-                        </div>
-                        <div class="radio radio-inline radio-success">
-                            <label><input type="radio" ng-model="selectedSearch.interval" value="1440">daily</label>
-                        </div>
-                        <!-- TODO: consider 'slider' -->
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="selectedSearch.interval" value="10">10 Minutes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="selectedSearch.interval" value="60">hourly
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="selectedSearch.interval" value="1440">daily
+                        </label>
                         <div class="checkbox">
                             <label><input type="checkbox" ng-model="selectedSearch.found"> Found</label>
                         </div>
@@ -43,11 +47,10 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="dismiss()" >Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="editSearch()" data-dismiss="modal">Save changes</button>
+                    <button class="btn btn-default" data-dismiss="modal" ng-click="dismiss()" ><i class="fa fa-ban"></i> Cancel</button>
+                    <button class="btn btn-primary" ng-click="editSearch()" data-dismiss="modal"><i class="fa fa-floppy-o"></i> Save</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>$.material.init();</script>
 </div>

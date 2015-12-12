@@ -1,34 +1,37 @@
-@media only screen and (min-width : 1000px) {
-	.h1, .jumbotron h2 {
-    	font-size: 4em !important;
-	}
-	.jumbotron {
-		padding-bottom: 3em !important;
-	}
-}
-
-.gruppo {
-	text-align: center;
+.banner {
 	font-family: 'Gruppo';
+	margin-top: 10%;
+	font-size: 100px;
+	text-align: center;
 }
 
-.align-middle {
+.search-form {
+	width: 75%;
+	margin: auto;
+	text-align: center;
+}
+
+.login-register-form {
 	width: 50%;
 	margin: auto;
+	text-align: center;
+}
+
+.login-advice {
+	width: 75%;
+	margin: auto;
+	text-align: center;
 }
 
 .custom-table {
 	width: 80% !important;
 	margin: auto;
-	text-align: left;
 }
 
-.move-right {
-	position: relative;
-	left: 40px;
+.row-margin {
+	margin-bottom: 3%;
 }
 
-.move-down {
-	position: relative;
-	bottom: -80px;
+.button-margin {
+	margin-top: 3%;
 }

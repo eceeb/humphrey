@@ -1,9 +1,9 @@
-<form class="gruppo align-middle" role="form" ng-controller="loginController">
+<form class="login-register-form" role="form" ng-controller="loginController">
     <div class="form-group">
-        <input type="email" class="form-control input-lg" placeholder="E-Mail" ng-model="formData.email" >
+        <input type="email" class="form-control" placeholder="E-Mail" ng-model="formData.email" >
     </div>
     <div class="form-group">
-        <input type="password" class="form-control input-lg" placeholder="Password" ng-model="formData.pwd">
+        <input type="password" class="form-control" placeholder="Password" ng-model="formData.pwd">
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Submit</button>
+    <button type="submit" class="btn btn-primary btn-lg" ng-click="login()"><i class="fa fa-user"></i> Login</button>
 </form>

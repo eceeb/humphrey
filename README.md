@@ -1,4 +1,4 @@
-Frontend for [Humphrey](https://search-that-site.herokuapp.com)
+Frontend for [Humphrey](https://humphrey.herokuapp.com)
 
 
 A simple, scheduled, automated website search service.
